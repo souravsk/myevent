@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 
 	"github.com/souravsk/myevent/src/eventsservice/rest"
@@ -11,13 +10,23 @@ import (
 )
 
 func main() {
-	confPath := flag.String("conf", `.\configuration\config.json`, "flag to set the path to the configuration json file") // flag to set the path to the configuration json file
+	confPath := flag.String("conf", `.\configuration\config.json`, "flag to set the path to the configuration json file")
 	flag.Parse()
 	//extract configuration
-	config, _ := configuration.ExtractConfiguration(*confPath) // extract configuration
+	config, _ := configuration.ExtractConfiguration(*confPath)
 
-	fmt.Println("Connecting to database")
-	dbhandler, _ := dblayer.NewPersistenceLayer(config.Databasetype, config.DBConnection) // connect to database
+	log.Println("Connecting to database")
+	dbhandler, err := dblayer.NewPersistenceLayer(config.Databasetype, config.DBConnection)
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println("Database connection successful... ")
 	//RESTful API start
-	log.Fatal(rest.ServeAPI(config.RestfulEndpoint, dbhandler)) // start the RESTful API
+	httpErrChan, httptlsErrChan := rest.ServeAPI(config.RestfulEndpoint, config.RestfulTLSEndPint, dbhandler)
+	select {
+	case err := <-httpErrChan:
+		log.Fatal("HTTP Error: ", err)
+	case err := <-httptlsErrChan:
+		log.Fatal("HTTPS Error: ", err)
+	}
 }
