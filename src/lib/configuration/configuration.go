@@ -12,12 +12,14 @@ var (
 	DBTypeDefault       = dblayer.DBTYPE("mongodb") // default database type
 	DBConnectionDefault = "mongodb://127.0.0.1"     // default database connection string
 	RestfulEPDefault    = "localhost:8181"          // default restful endpoint
+	RestfulTLSEPDefault = "localhost:9191"
 )
 
 type ServiceConfig struct {
-	Databasetype    dblayer.DBTYPE `json:"databasetype"`
-	DBConnection    string         `json:"dbconnection"`
-	RestfulEndpoint string         `json:"restfulapi_endpoint"`
+	Databasetype      dblayer.DBTYPE `json:"databasetype"`
+	DBConnection      string         `json:"dbconnection"`
+	RestfulEndpoint   string         `json:"restfulapi_endpoint"`
+	RestfulTLSEndPint string         `json:"restfulapi-tlsendpoint"`
 }
 
 func ExtractConfiguration(filename string) (ServiceConfig, error) {
@@ -25,6 +27,7 @@ func ExtractConfiguration(filename string) (ServiceConfig, error) {
 		DBTypeDefault,
 		DBConnectionDefault,
 		RestfulEPDefault,
+		RestfulTLSEPDefault,
 	}
 
 	file, err := os.Open(filename)
