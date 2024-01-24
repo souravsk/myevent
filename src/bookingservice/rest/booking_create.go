@@ -76,7 +76,7 @@ func (h *CreateBookingHandler) ServeHTTP(w http.ResponseWriter, r *http.Request)
 	}
 	h.eventEmitter.Emit(&msg)
 
-	h.database.AddBookingForUser([]byte("someUserID"), booking)
+	//h.database.AddBookingForUser([]byte("someUserID"), booking)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(201)
