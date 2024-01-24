@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/souravsk/myevent/src/src/lib/msgqueue"
-	"github.com/souravsk/myevent/src/src/lib/msgqueue/amqp"
-	"github.com/souravsk/myevent/src/src/lib/msgqueue/kafka"
+	"github.com/souravsk/myevent/src/lib/msgqueue"
+	"github.com/souravsk/myevent/src/lib/msgqueue/amqp"
+	"github.com/souravsk/myevent/src/lib/msgqueue/kafka"
 )
 
 func NewEventListenerFromEnvironment() (msgqueue.EventListener, error) {
