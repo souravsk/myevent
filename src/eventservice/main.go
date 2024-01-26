@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/IBM/sarama"
-	"github.com/souravsk/myevent/src/eventsservice/rest"
+	"github.com/souravsk/myevent/src/eventservice/rest"
 	"github.com/souravsk/myevent/src/lib/configuration"
 	"github.com/souravsk/myevent/src/lib/msgqueue"
 	msgqueue_amqp "github.com/souravsk/myevent/src/lib/msgqueue/amqp"
