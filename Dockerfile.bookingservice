@@ -1,13 +1,13 @@
-FROM golang:1.9
+FROM golang:1.19
 
-WORKDIR /go/src/github.com/martin-helmich/cloudnativego-backend
+WORKDIR /go/src/github.com/souravsk/myevent
 COPY . .
 WORKDIR src/bookingservice
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o bookingservice
 
 FROM scratch
 
-COPY --from=0 /go/src/github.com/martin-helmich/cloudnativego-backend/src/bookingservice/bookingservice /bookingservice
+COPY --from=0 /go/src/github.com/souravsk/myevent/src/bookingservice/bookingservice /bookingservice
 ENV LISTEN_URL=0.0.0.0:8181
 EXPOSE 8181
 CMD ["/bookingservice"]
