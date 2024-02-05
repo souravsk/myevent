@@ -1,5 +1,5 @@
 import * as React from "react";
-//import {Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Event} from "../model/event";
 
 export interface EventListItemProps {
@@ -23,7 +23,7 @@ export class EventListItem extends React.Component<EventListItemProps, {}> {
             <td>{locationName}</td>
             <td>{start.toLocaleDateString()}</td>
             <td>{end.toLocaleDateString()}</td>
-           
+            <td><Link to={`/events/${this.props.event.ID}/book`} className="btn btn-primary">Book now!</Link></td>
         </tr>
     }
 }

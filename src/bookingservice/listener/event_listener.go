@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/globalsign/mgo/bson"
 	"github.com/souravsk/myevent/src/contracts"
 	"github.com/souravsk/myevent/src/lib/msgqueue"
 	"github.com/souravsk/myevent/src/lib/persistence"
-	"gopkg.in/mgo.v2/bson"
 )
 
 type EventProcessor struct {
